@@ -42,8 +42,8 @@ wedin_bound_resampling <- function(X, perp_basis, right_vectors, num_samples=100
     resampled_norms <- rep(0, num_samples)
 
     for(s in 1:num_samples){
-
-        sampled_col_index <- sample.int(n=dim(perp_basis)[2],
+        n_dim <- ifelse(is.null(dim(perp_basis)), 1, dim(perp_basis)[2])
+        sampled_col_index <- sample.int(n=n_dim,
                                         size=rank,
                                         replace=TRUE)
 
