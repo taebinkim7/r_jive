@@ -12,8 +12,6 @@ get_wedin_bound_samples <- function(X, SVD, signal_rank, num_samples=1000){
 
     # resample for U and V
     U_perp <- SVD[['u']][ , -(1:signal_rank)]
-    print(dim(X))
-    print(dim(as.matrix(U_perp))
     U_sampled_norms <- wedin_bound_resampling(X=X,
                                               perp_basis=U_perp,
                                               right_vectors=FALSE,
@@ -46,8 +44,11 @@ wedin_bound_resampling <- function(X, perp_basis, right_vectors, num_samples=100
         sampled_col_index <- sample.int(n=n_dim,
                                         size=n_dim,
                                         replace=TRUE)
-                                        
-        perp_resampled <- ifelse(is.null(dim(perp_basis)), perp_basis, perp_basis[ , sampled_col_index])
+        
+        if(is.null(dim(perp_basis))){
+            perp_resampled <- perp_basis
+        } else{
+            perp_resampled <- perp_basis[ , sampled_col_index]
 
         if(right_vectors){
             resampled_projection <- X %*% perp_resampled
