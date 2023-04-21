@@ -37,14 +37,12 @@ get_wedin_bound_samples <- function(X, SVD, signal_rank, num_samples=1000){
 #' @param right_vectors Boolean. Right multiplication or left multiplication.
 #' @param num_samples Integer. Number of vectors selected for resampling procedure.
 wedin_bound_resampling <- function(X, perp_basis, right_vectors, num_samples=1000){
-
-    rank <- dim(perp_basis)[2]
+    n_dim <- ifelse(is.null(dim(perp_basis)), 1, dim(perp_basis)[2])
     resampled_norms <- rep(0, num_samples)
 
     for(s in 1:num_samples){
-        n_dim <- ifelse(is.null(dim(perp_basis)), 1, dim(perp_basis)[2])
         sampled_col_index <- sample.int(n=n_dim,
-                                        size=rank,
+                                        size=n_dim,
                                         replace=TRUE)
 
 
