@@ -46,7 +46,7 @@ wedin_bound_resampling <- function(X, perp_basis, right_vectors, num_samples=100
                                         replace=TRUE)
 
 
-        perp_resampled <- ifelse(is.null(dim(perp_basis)), perp_basis, perp_basis[ , sampled_col_index])
+        perp_resampled <- ifelse(is.null(dim(perp_basis)), as.matrix(perp_basis), perp_basis[ , sampled_col_index])
 
         if(right_vectors){
             resampled_projection <- X %*% perp_resampled
